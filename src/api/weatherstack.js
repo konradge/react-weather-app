@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://api.weatherstack.com"
+  baseURL: "https://cors-anywhere.herokuapp.com/http://api.weatherstack.com"
 });

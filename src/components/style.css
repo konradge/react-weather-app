@@ -1,12 +1,4 @@
-.darkmode {
-  background-color: #333;
-  color: #eee;
-}
-.lightmode {
-  background-color: #eee;
-  color: #333;
-}
-
+/*Widget and children containers*/
 .widget {
   font-size: 20px;
   padding: 20px;
@@ -14,35 +6,73 @@
   height: 300px;
   float: left;
   border-radius: 20px;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
+  position: relative;
 }
 
-.search-bar {
-  padding: 0px;
+.delete {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.widget .delete i {
+  margin: 10px;
+  font-size: 25px;
 }
 
-.search {
-  text-align: center;
+.widget .location {
+  margin-top: -10px;
+}
+
+.body {
+  padding-top: 10px;
+  position: relative;
+}
+
+/*Light- and Darkmode*/
+
+.darkmode {
+  background-color: #333;
+  color: #eee;
+}
+.darkmode .location {
+  color: #eee;
+}
+.widget.darkmode .delete i {
+  color: #222;
+}
+.widget:hover.darkmode .delete i {
+  color: darkred;
+}
+.widget.darkmode .weather-temp {
+  border: solid 2px #444;
+}
+
+.lightmode {
   background-color: #eee;
+  color: #333;
 }
-.search .input {
-  width: 250px;
+.widget.lightmode .delete i {
+  color: #fff;
+}
+.widget:hover.lightmode .delete i {
+  color: lightcoral;
+}
+.widget.lightmode .weather-temp {
+  border: solid 2px #ddd;
 }
 
+/*Weather content*/
 .time {
   font-size: 40px;
 }
 
-.relative {
-  position: relative;
-}
-
 .weather-temp {
   position: absolute;
-  left: 140px;
-  top: 60px;
+  right: 0px;
+  top: 0px;
   font-size: 40px;
-  border: solid 2px #444;
   border-radius: 15px;
   padding: 10px;
 }
@@ -58,6 +88,7 @@
 .humidity {
   margin-top: 50px;
 }
+
 .infos .icon {
   float: left;
 }
@@ -71,4 +102,16 @@
   float: right;
   font-size: 15px;
   vertical-align: bottom;
+}
+
+/*Search Widget*/
+.search-bar {
+  padding: 0px;
+}
+.search {
+  text-align: center;
+  background-color: #eee;
+}
+.search .input {
+  width: 250px;
 }

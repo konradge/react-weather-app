@@ -37,7 +37,6 @@ export default class WeatherWidget extends React.Component {
     if (weather.data.error) {
       this.setState({ status: 0 });
       this.setState({ message: weather.data.error.info });
-      console.log(weather.data.error.info);
     } else {
       this.setState({ weather: weather.data, status: 1 });
       if (this.props.addWidget && !this.props.coordSearch) {
@@ -57,45 +56,56 @@ export default class WeatherWidget extends React.Component {
     } else {
       let style =
         this.state.weather.current.is_day === "no"
-          ? "widget darkmode relative"
-          : "widget lightmode relative";
+          ? "widget darkmode"
+          : "widget lightmode";
       let localtime = new Date(this.state.weather.location.localtime);
       return (
         <div className={style}>
-          <div className="ui header">
+          <div className="delete">
+            <i
+              className="close icon"
+              onClick={() => this.props.onDelete(this.props.id)}
+            ></i>
+          </div>
+          <div className="ui header location">
             {this.state.weather.location.name +
               ", " +
               this.state.weather.location.country}
           </div>
-          <div className="time">
-            {localtime.getHours() + ":" + localtime.getMinutes()}
-          </div>
-          <div className="weather-temp">
-            <img
-              src={this.state.weather.current.weather_icons[0]}
-              alt={this.state.weather.current.weather_descriptions[0]}
-            />
-            <div>{this.state.weather.current.temperature}°C</div>
-          </div>
-          <div className="humidity infos">
-            <WiHumidity size={30} className="icon" />
-            <div className="data">
-              {this.state.weather.current.humidity}
-              <div className="small">%</div>
+          <div className="body">
+            <div className="time">
+              {localtime.getHours() +
+                ":" +
+                (localtime.getMinutes() < 10 ? "0" : "") +
+                localtime.getMinutes()}
             </div>
-          </div>
-          <div className="infos">
-            <WiThermometer size={30} className="icon" />
-            <div className="data">
-              {this.state.weather.current.feelslike}
-              <div className="small">°C</div>
+            <div className="weather-temp">
+              <img
+                src={this.state.weather.current.weather_icons[0]}
+                alt={this.state.weather.current.weather_descriptions[0]}
+              />
+              <div>{this.state.weather.current.temperature}°C</div>
             </div>
-          </div>
-          <div className="infos">
-            <WiStrongWind size={30} className="icon" />
-            <div className="data">
-              {this.state.weather.current.wind_speed}
-              <div className="small">km/h</div>
+            <div className="humidity infos">
+              <WiHumidity size={30} className="icon" />
+              <div className="data">
+                {this.state.weather.current.humidity}
+                <div className="small">%</div>
+              </div>
+            </div>
+            <div className="infos">
+              <WiThermometer size={30} className="icon" />
+              <div className="data">
+                {this.state.weather.current.feelslike}
+                <div className="small">°C</div>
+              </div>
+            </div>
+            <div className="infos">
+              <WiStrongWind size={30} className="icon" />
+              <div className="data">
+                {this.state.weather.current.wind_speed}
+                <div className="small">km/h</div>
+              </div>
             </div>
           </div>
         </div>
