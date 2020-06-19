@@ -6,8 +6,7 @@
   height: 300px;
   float: left;
   border-radius: 20px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 10px;
   position: relative;
 }
 
@@ -43,7 +42,7 @@
   color: #222;
 }
 .widget:hover.darkmode .delete i {
-  color: darkred;
+  color: red;
 }
 .widget.darkmode .weather-temp {
   border: solid 2px #444;

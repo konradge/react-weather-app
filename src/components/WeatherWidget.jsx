@@ -1,6 +1,6 @@
 import React from "react";
 
-import weatherstack from "../api/weatherstack";
+import weatherstack, { defaultParams } from "../api/weatherstack";
 
 import "./style.css";
 import NewCitySearch from "./NewCitySearch";
@@ -10,7 +10,7 @@ export default class WeatherWidget extends React.Component {
     weather: {},
     message: "",
     //0:Warte auf Sucheingabe, 1: Sucheingabe erfolgt 2:Search for coordinates
-    status: 0
+    status: 0,
   };
   constructor(props) {
     super(props);
@@ -21,8 +21,9 @@ export default class WeatherWidget extends React.Component {
 
   getCoordinates() {
     window.navigator.geolocation.getCurrentPosition(
-      pos => this.getWeather(pos.coords.latitude + "," + pos.coords.longitude),
-      err => this.setState({ status: 0, message: err.message })
+      (pos) =>
+        this.getWeather(pos.coords.latitude + "," + pos.coords.longitude),
+      (err) => this.setState({ status: 0, message: err.message })
     );
   }
 
@@ -30,9 +31,9 @@ export default class WeatherWidget extends React.Component {
     this.setState({ message: "Loading data from weatherstack.com..." });
     let weather = await weatherstack.get("/current", {
       params: {
+        ...defaultParams,
         query: searchTerm,
-        access_key: "1d39218ef8304059bc20df0213b7a37e"
-      }
+      },
     });
     if (weather.data.error) {
       this.setState({ status: 0 });
